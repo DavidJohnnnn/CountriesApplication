@@ -1,0 +1,9 @@
+We will implement a search bar. If we type in a country into the search bar, the country API that we use will return the list of countries that match.
+
+We will use this API:
+https://restcountries.eu/#api-endpoints-all
+
+Steps:
+Step 1:
+Initialize npm and install express, node-fetch and ejs.
+Create an index.js where your application code will be on with the application code that can make your code run properly.
