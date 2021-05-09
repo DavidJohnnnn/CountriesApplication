@@ -1,0 +1,42 @@
+<%- include('header', {tabTitle: "All Countries"}); -%>
+  <div class="container">
+    <br>
+    <br>
+    <form class="" action="/" method="get">
+      <button type="submit" class="btn btn-outline-dark">Return Home</button>
+    </form>
+    <br>
+
+    <div class="card mb-3">
+      <br>
+      <img class="card-img-top" src="<%= countriesData.flag %>" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"><%= countriesData.name %></h5>
+        <p class="card-text">
+          <% for (j = 0; j < countriesData.altSpellings.length; j++){ %>
+            <%if (j == 0) { %>
+              Can also be called:
+            <% } %>
+            <% if (j < countriesData.altSpellings.length - 1 ) { %>
+              <%= countriesData.altSpellings[j] %>,
+            <% } %>
+            <% if (j === countriesData.altSpellings.length - 1) { %>
+              <%= countriesData.altSpellings[j] %>
+            <% } %>
+          <% } %>
+        </p>
+        <p class="card-text">
+          <small class="text-muted">
+            There are approximately <%= countriesData.population %> people living there.
+            <% if (countriesData.demonym != "") { %>
+              The people are referred to with the demonym <%= countriesData.demonym %>.
+            <% } %>
+          </small>
+        </p>
+      </div>
+      <br>
+    </div>
+
+  </div>
+
+<%- include('footer'); -%>

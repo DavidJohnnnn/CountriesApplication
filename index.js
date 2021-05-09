@@ -2,7 +2,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const ISO6391 = require('iso-639-1');
-
+const bodyParser = require('body-parser');
 
 // Initialize our app
 let app = express();
@@ -10,6 +10,8 @@ let app = express();
 
 app.set("view engine", "ejs");  // Making ejs the view engine so we can render ejs pages instead of html pages.
 app.use(express.static('public'));  // Allowing our app to use the files in public which include styles.css and styles.js files to be used.
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 app.get("/", function (req, res) {
   console.log(ISO6391.getCode("ENglish"));
@@ -66,20 +68,135 @@ app.post("/all", function (req, res) {
 });
 
 app.post("/by-name", function (req, res) {
-  console.log("test");
+  let url = 'https://restcountries.eu/rest/v2/name/';
+  let country = encodeURIComponent(req.body.byName);
+  url = url + country;
+  console.log(url);
 
-  fetch('https://restcountries.eu/rest/v2/name/united')
+  fetch(url)
   .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
   .then(data => renderCountriesByName(data, res));  // The function renderWebpage is run with the retrieved JSON data.
 });
 
+app.post("/by-full-name", function (req, res) {
+  let url = 'https://restcountries.eu/rest/v2/name/';
+  let country = encodeURIComponent(req.body.byFullName);
+  url = url + country + '?fullText=true';
+  console.log(url);
+
+  fetch(url)
+  .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+  .then(data => renderCountriesByName(data, res));  // The function renderWebpage is run with the retrieved JSON data.
+});
+
+app.post("/by-country-code", function (req, res) {
+  let url = 'https://restcountries.eu/rest/v2/alpha/';
+  let code = encodeURIComponent(req.body.byCountryCode);
+  url = url + code;
+  console.log(url);
+
+  fetch(url)
+  .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+  .then(data => renderCountriesByCode(data, res));  // The function renderWebpage is run with the retrieved JSON data.
+});
+
+app.post("/by-currency", function (req, res) {
+  let url = 'https://restcountries.eu/rest/v2/currency/';
+  let currency = encodeURIComponent(req.body.byCurrency);
+  url = url + currency;
+  console.log(url);
+
+  fetch(url)
+  .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+  .then(data => renderCountriesByName(data, res));  // The function renderWebpage is run with the retrieved JSON data.
+});
+
+app.post("/by-language", function (req, res) {
+  let url = 'https://restcountries.eu/rest/v2/lang/';
+  let language = encodeURIComponent(ISO6391.getCode(req.body.byLanguage));
+  url = url + language;
+  console.log(url);
+
+  fetch(url)
+  .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+  .then(data => renderCountriesByName(data, res));  // The function renderWebpage is run with the retrieved JSON data.
+});
+
+app.post("/by-capital-city", function (req, res) {
+  let url = 'https://restcountries.eu/rest/v2/capital/';
+  let capitalCity = encodeURIComponent(req.body.byCapitalCity);
+  url = url + capitalCity;
+  console.log(url);
+
+  fetch(url)
+  .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+  .then(data => renderCountriesByName(data, res));  // The function renderWebpage is run with the retrieved JSON data.
+});
+
+app.post("/by-calling-code", function (req, res) {
+  let url = 'https://restcountries.eu/rest/v2/callingcode/';
+  let callingCode = req.body.byCallingCode;
+  url = url + callingCode;
+  console.log(url);
+
+  fetch(url)
+  .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+  .then(data => renderCountriesByName(data, res));  // The function renderWebpage is run with the retrieved JSON data.
+});
+
+app.post("/by-region", function (req, res) {
+  let url = 'https://restcountries.eu/rest/v2/region/';
+  let region = req.body.byRegion;
+  url = url + region;
+  console.log(url);
+
+  fetch(url)
+  .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+  .then(data => renderCountriesByName(data, res));  // The function renderWebpage is run with the retrieved JSON data.
+});
+
+app.post("/by-regional-block", function (req, res) {
+  let url = 'https://restcountries.eu/rest/v2/regionalbloc/';
+  let regionalBloc = req.body.byRegionalBlock;
+  url = url + regionalBloc;
+  console.log(url);
+
+  fetch(url)
+  .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+  .then(data => renderCountriesByName(data, res));  // The function renderWebpage is run with the retrieved JSON data.
+});
+
+
+
 function renderAllCountries(completeData, response) {
-  response.render("allCountries", {countriesData: completeData});
+  console.log(completeData.status);
+
+  if (completeData.status === undefined) {
+    console.log('got it');
+    response.render("allCountries", {countriesData: completeData});
+  } else {
+    response.redirect("/");
+  }
 }
 
 function renderCountriesByName(completeData, response) {
-  response.render("countriesByName", {countriesData: completeData});
+  console.log(completeData);
+  if (completeData.status === undefined) {
+    response.render("countriesByName", {countriesData: completeData});
+  } else {
+    response.redirect("/");
+  }
 }
+
+function renderCountriesByCode(completeData, response) {
+  console.log(completeData);
+  if (completeData.status === undefined) {
+    response.render("countriesByCode", {countriesData: completeData});
+  } else {
+    response.redirect("/");
+  }
+}
+
 
 
 
