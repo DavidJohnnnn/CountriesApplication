@@ -1,63 +1,30 @@
-<%- include('header', {tabTitle: "I'm David John"}); -%>
-
+<%- include('header', {tabTitle: "My Countries Search Application"}); -%>
+  <div class="container">
     <form class="" action="/all" method="post">
       <br>
-      <button type="submit" name="button">Get All Countries!</button>
+      <button type="submit" class="btn btn-outline-dark">Get All Countries!</button>
+      <br>
       <br>
     </form>
-    <form class="" action="/by-name" method="post">
-      <br>
-      <input type="text" name="" value="">
-      <button type="submit" name="button"></button>
-      <br>
-    </form>
-    <form class="" action="/by-fullName" method="post">
-      <br>
-      <input type="text" name="" value="">
-      <button type="submit" name="button"></button>
-      <br>
-    </form>
-    <form class="" action="/by-country-code" method="post">
-      <br>
-      <input type="text" name="" value="">
-      <button type="submit" name="button"></button>
-      <br>
-    </form>
-    <form class="" action="/by-currency" method="post">
-      <br>
-      <input type="text" name="" value="">
-      <button type="submit" name="button"></button>
-      <br>
-    </form>
-    <form class="" action="/by-language-code" method="post">
-      <br>
-      <input type="text" name="" value="">
-      <button type="submit" name="button"></button>
-      <br>
-    </form>
-    <form class="" action="/by-capital-city" method="post">
-      <br>
-      <input type="text" name="" value="">
-      <button type="submit" name="button"></button>
-      <br>
-    </form>
-    <form class="" action="/by-calling-code" method="post">
-      <br>
-      <input type="text" name="" value="">
-      <button type="submit" name="button"></button>
-      <br>
-    </form>
-    <form class="" action="/by-region" method="post">
-      <br>
-      <input type="text" name="" value="">
-      <button type="submit" name="button"></button>
-      <br>
-    </form>
-    <form class="" action="/by-regional-block" method="post">
-      <br>
-      <input type="text" name="" value="">
-      <button type="submit" name="button"></button>
-      <br>
-    </form>
+
+    <%- include('searchForm', {route: "/by-name", placeholderText: "Enter name of country", buttonText: "Search by country name"}); -%>
+
+    <%- include('searchForm', {route: "/by-full-name", placeholderText: "Enter full name of country", buttonText: "Search by full country name"}); -%>
+
+    <%- include('searchForm', {route: "/by-country-code", placeholderText: "Enter country code (ex. CHN, GBR, etc)", buttonText: "Search by country code"}); -%>
+
+    <%- include('searchForm', {route: "/by-currency", placeholderText: "Enter short-form currency (ex. USD, CAD)", buttonText: "Search by country currency"}); -%>
+
+    <%- include('searchForm', {route: "/by-language", placeholderText: "Enter language", buttonText: "Search by language"}); -%>
+
+    <%- include('searchForm', {route: "/by-capital-city", placeholderText: "Enter capital city (ex. Ottawa)", buttonText: "Search by capital city"}); -%>
+
+    <%- include('searchForm', {route: "/by-calling-code", placeholderText: "Enter calling code", buttonText: "Search by calling code"}); -%>
+
+    <%- include('searchForm', {route: "/by-region", placeholderText: "Enter region", buttonText: "Search by region"}); -%>
+
+    <%- include('searchForm', {route: "/by-regional-block", placeholderText: "Enter regional block", buttonText: "Search by regional block"}); -%>
+
+  </div>
 
 <%- include('footer'); -%>
