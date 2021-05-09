@@ -1,0 +1,25 @@
+{
+  "name": "countriesapplication",
+  "version": "1.0.0",
+  "description": "Countries application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidJohnnnn/CountriesApplication.git"
+  },
+  "author": "David John",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidJohnnnn/CountriesApplication/issues"
+  },
+  "homepage": "https://github.com/DavidJohnnnn/CountriesApplication#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "iso-639-1": "^2.1.9",
+    "node-fetch": "^2.6.1"
+  }
+}
