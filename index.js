@@ -66,7 +66,7 @@ app.post("/all", function (req, res) {
 });
 
 app.post("/by-name", function (req, res) {
-  console.log(req.body.);
+  console.log("test");
 
   fetch('https://restcountries.eu/rest/v2/name/united')
   .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
