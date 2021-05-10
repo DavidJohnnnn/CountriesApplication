@@ -22,7 +22,7 @@ app.get("/", function (req, res) {
   if (redirect) {
     console.log("redirect");
     redirect = false;
-    res.render("index", {error: '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Try Again!</strong> You tried to something invalid. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'});
+    res.render("index", {error: '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Try Again!</strong> You tried to enter something invalid. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'});
   } else {
     redirect = false;
     res.render("index", {error: ""});
