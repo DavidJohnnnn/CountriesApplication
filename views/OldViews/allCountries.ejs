@@ -1,0 +1,19 @@
+<%- include('header', {tabTitle: "All Countries"}); -%>
+  <div class="container">
+    <br>
+    <br>
+    <form class="" action="/" method="get">
+      <button type="submit" class="btn btn-outline-dark">Return Home</button>
+    </form>
+    <br>
+
+    <h1>The List of All Countries</h1>
+
+    <% for (i = 0; i < countriesData.length; i++){ %>
+
+      <%- include('countryCard', {country: countriesData[i]}); -%>
+
+    <% } %>
+  </div>
+
+<%- include('footer'); -%>

@@ -1,4 +1,4 @@
-<%- include('header', {tabTitle: "All Countries"}); -%>
+<%- include('header', {tabTitle: search}); -%>
   <div class="container">
     <br>
     <form class="" action="/" method="get">
@@ -6,39 +6,12 @@
     </form>
     <br>
     <h1><%= search %>: <%= searched %></h1>
-
-
-    <% for (i = 0; i < countriesData.length; i++){ %>
-      <div class="card mb-3">
-        <br>
-        <img class="card-img-top" src="<%= countriesData[i].flag %>" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><%= countriesData[i].name %></h5>
-          <p class="card-text">
-            <% for (j = 0; j < countriesData[i].altSpellings.length; j++){ %>
-              <%if (j == 0) { %>
-                Can also be called:
-              <% } %>
-              <% if (j < countriesData[i].altSpellings.length - 1 ) { %>
-                <%= countriesData[i].altSpellings[j] %>,
-              <% } %>
-              <% if (j === countriesData[i].altSpellings.length - 1) { %>
-                <%= countriesData[i].altSpellings[j] %>
-              <% } %>
-            <% } %>
-          </p>
-          <p class="card-text">
-            <small class="text-muted">
-              There are approximately <%= countriesData[i].population %> people living there.
-              <% if (countriesData[i].demonym != "") { %>
-                The people are referred to with the demonym <%= countriesData[i].demonym %>.
-              <% } %>
-            </small>
-          </p>
-        </div>
-        <br>
-      </div>
-
+    <% if (search === "Search country by code") { %>
+      <%- include('countryCard', {country: countriesData}); -%>
+    <% } else { %>
+      <% for (i = 0; i < countriesData.length; i++){ %>
+        <%- include('countryCard', {country: countriesData[i]}); -%>
+      <% } %>
     <% } %>
   </div>
 

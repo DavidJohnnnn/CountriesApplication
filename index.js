@@ -256,11 +256,8 @@ app.post("/by-regional-bloc", function (req, res) {
 
 
 function renderAllCountries(completeData, response) {
-  console.log(completeData.status);
-
   if (completeData.status === undefined) {
-    console.log('got it');
-    response.render("allCountries", {countriesData: completeData});
+    response.render("countriesSearch", {search: "All Countries", searched: "", countriesData: completeData});
   } else {
     redirect = true;
     response.redirect("/");
@@ -268,7 +265,6 @@ function renderAllCountries(completeData, response) {
 }
 
 function renderCountries(completeData, response, searchType, searchTerm) {
-  console.log(completeData);
   if (completeData.status === undefined) {
     response.render("countriesSearch", {search: searchType, searched: searchTerm, countriesData: completeData});
   } else {
@@ -278,9 +274,8 @@ function renderCountries(completeData, response, searchType, searchTerm) {
 }
 
 function renderCountriesByCode(completeData, response, countryCode) {
-  console.log(completeData);
   if (completeData.status === undefined) {
-    response.render("countriesByCode", {code: countryCode, countriesData: completeData});
+    response.render("countriesSearch", {search: "Search country by code", searched: countryCode, countriesData: completeData});
   } else {
     redirect = true;
     response.redirect("/");
@@ -296,4 +291,5 @@ function renderCountriesByCode(completeData, response, countryCode) {
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("Server is running on port 3000.");
+  console.log(redirect);
 });

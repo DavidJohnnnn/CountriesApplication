@@ -1,0 +1,37 @@
+<div class="card mb-3">
+  <br>
+  <img class="card-img-top" src="<%= country.flag %>" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><%= country.name %></h5>
+    <p class="card-text">
+      <% for (j = 0; j < country.altSpellings.length; j++){ %>
+        <%if (j == 0) { %>
+          Can also be called:
+        <% } %>
+        <% if (j < country.altSpellings.length - 1 ) { %>
+          <%= country.altSpellings[j] %>,
+        <% } %>
+        <% if (j === country.altSpellings.length - 1) { %>
+          <%= country.altSpellings[j] %>
+        <% } %>
+      <% } %>
+    </p>
+  </div>
+  <div class="container-fluid plusBox cardThere" style="text-align: center;">
+    <i class="fas fa-plus-circle"></i>
+  </div>
+  <div class="container-fluid minusBox cardGone">
+    <p class="card-text">
+      <small class="text-muted">
+        There are approximately <%= country.population %> people living there.
+        <% if (country.demonym != "") { %>
+          The people are referred to with the demonym <%= country.demonym %>.
+        <% } %>
+      </small>
+    </p>
+    <div style="text-align: center;">
+      <i class="fas fa-minus-circle"></i>
+    </div>
+  </div>
+  <br>
+</div>
