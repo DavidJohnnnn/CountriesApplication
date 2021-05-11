@@ -52,17 +52,22 @@ img {
 }
 
 .plusBox {
+  text-align: center;
   overflow: hidden;
 }
 
 .minusBox {
+  padding-left: 30px;
+  transition: all 1000ms cubic-bezier(0.785, 0.135, 0.150, 0.860);
   overflow: hidden;
 }
 
 .cardGone {
+  transform: translate3d(100px, 0, 100px);
   max-height: 0px;
 }
 
 .cardThere {
-  max-height: 100%;
+  transform: translate3d(0, 0, 0);
+  max-height: 1000px;
 }

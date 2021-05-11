@@ -3,8 +3,10 @@
 // We require the following so we can make use of them below.
 const express = require('express');
 const fetch = require('node-fetch');
-const ISO6391 = require('iso-639-1');
 const bodyParser = require('body-parser');
+const ISO6391 = require('iso-639-1');
+//const countriesQuery = require('countries-code');
+const countriesQuery = require("i18n-iso-countries");
 
 // Initialize our app
 let app = express();
@@ -257,7 +259,7 @@ app.post("/by-regional-bloc", function (req, res) {
 
 function renderAllCountries(completeData, response) {
   if (completeData.status === undefined) {
-    response.render("countriesSearch", {search: "All Countries", searched: "", countriesData: completeData});
+    response.render("countriesSearch", {langs: ISO6391, countryCodes: countriesQuery, search: "All Countries", searched: "", countriesData: completeData});
   } else {
     redirect = true;
     response.redirect("/");
@@ -266,7 +268,7 @@ function renderAllCountries(completeData, response) {
 
 function renderCountries(completeData, response, searchType, searchTerm) {
   if (completeData.status === undefined) {
-    response.render("countriesSearch", {search: searchType, searched: searchTerm, countriesData: completeData});
+    response.render("countriesSearch", {langs: ISO6391, countryCodes: countriesQuery, search: searchType, searched: searchTerm, countriesData: completeData});
   } else {
     redirect = true;
     response.redirect("/");
@@ -275,7 +277,7 @@ function renderCountries(completeData, response, searchType, searchTerm) {
 
 function renderCountriesByCode(completeData, response, countryCode) {
   if (completeData.status === undefined) {
-    response.render("countriesSearch", {search: "Search country by code", searched: countryCode, countriesData: completeData});
+    response.render("countriesSearch", {langs: ISO6391, countryCodes: countriesQuery, search: "Search country by code", searched: countryCode, countriesData: completeData});
   } else {
     redirect = true;
     response.redirect("/");

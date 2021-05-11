@@ -6,7 +6,7 @@
     <p class="card-text">
       <% for (j = 0; j < country.altSpellings.length; j++){ %>
         <%if (j == 0) { %>
-          Can also be called:
+          Can also be identified as:
         <% } %>
         <% if (j < country.altSpellings.length - 1 ) { %>
           <%= country.altSpellings[j] %>,
@@ -17,18 +17,85 @@
       <% } %>
     </p>
   </div>
-  <div class="container-fluid plusBox cardThere" style="text-align: center;">
+  <div class="container-fluid plusBox cardThere">
     <i class="fas fa-plus-circle"></i>
   </div>
   <div class="container-fluid minusBox cardGone">
-    <p class="card-text">
-      <small class="text-muted">
-        There are approximately <%= country.population %> people living there.
-        <% if (country.demonym != "") { %>
+    <small class="text-muted">
+      <p class="card-text">
+        <%= country.name %> has the following top level domain(s): <br>
+        <% for (k = 0; k < country.topLevelDomain.length; k++) { %>
+          <%= country.topLevelDomain[k] %>
+          <br>
+        <% } %>
+      </p>
+      <p class="card-text">
+        The two letter country code for <%= country.name %> is <%= country.alpha2Code %>. (This is the ISO 3166-1 Alpha 2 code)
+        <br>
+        The three letter country code for <%= country.name %> is <%= country.alpha3Code %>. (This is the ISO 3166-1 Alpha 3 code)
+      </p>
+      <p class="card-text">
+        <%= country.name %> has the following calling code(s):
+        <% for (l = 0; l < country.callingCodes.length; l++) { %>
+          <br>+<%= country.callingCodes[l] %>
+        <% } %>
+      </p>
+      <p class="card-text">
+        <% if (country.capital !== "") { %>
+          The capital of <%= country.name %> is <%= country.capital %>.
+        <% } %>
+        <% if (country.region !== "") { %>
+          <br>Region: <%= country.region %>.
+        <% } %>
+        <% if (country.subregion !== "") { %>
+          <br>Subregion: <%= country.subregion %>.
+        <% } %>
+
+        <br>There are approximately <%= country.population %> people living there.
+
+        <% if (country.demonym !== "") { %>
           The people are referred to with the demonym <%= country.demonym %>.
         <% } %>
-      </small>
-    </p>
+        The area of this country is <%= country.area %> square kilometers.
+        <% if (country.gini !== "" ) { %>
+        The gini coefficient of this country is <%= country.gini %>.
+        <% } %>
+      </p>
+      <p class="card-text">
+        <% if (country.borders.length > 0) { %>
+          This country borders the following countries:
+          <% for (m = 0; m < country.borders.length; m++ ) { %>
+            <br>
+            <%= countryCodes.getName(country.borders[m], "en", {select: "official"}) %>
+          <% } %>
+        <% } %>
+      </p>
+      <p class="card-text">
+        The name of this country is natively written as: <%= country.nativeName %>. This country's numeric code is <%= country.numericCode %>.
+      </p>
+      <p class="card-text">
+        This country uses the following currencies:
+        <% for (n = 0; n < country.currencies.length; n++) { %>
+          <br>
+          <%= country.currencies[n].name %> (Currency code: <%= country.currencies[n].code %>, <%= country.currencies[n].symbol %>)
+        <% } %>
+      </p>
+      <p class="card-text">
+        The people of this country speak the following language(s):
+        <% for (a = 0; a < country.languages.length; a++) { %>
+          <br>
+          <%= country.languages[a].name %> (native name: <%= country.languages[a].nativeName %>)
+        <% } %>
+      </p>
+
+      <p class="card-text">
+        The name of this country can be translated into the following languages:
+        <% for (const language in country.translations) { %>
+          <br>
+          <%= langs.getName(language) %>: <%= country.translations[language] %>
+        <% } %>
+      </p>
+    </small>
     <div style="text-align: center;">
       <i class="fas fa-minus-circle"></i>
     </div>
