@@ -95,6 +95,12 @@
           <%= langs.getName(language) %>: <%= country.translations[language] %>
         <% } %>
       </p>
+
+      <p class="card-text">
+
+        <a class="btn btn-primary" href="<%= 'https://www.google.com/maps/place/' + country.latlng[0] + ',' + country.latlng[1]%>" role="button">Google Map Location</a>
+
+      </p>
     </small>
     <div style="text-align: center;">
       <i class="fas fa-minus-circle"></i>

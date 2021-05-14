@@ -7,7 +7,7 @@
     <br>
     <h1><%= search %>: <%= searched %></h1>
     <% if (search === "Search country by code") { %>
-      <%- include('countryCard'); -%>
+      <%- include('countryCard', {country: countriesData}); -%>
     <% } else { %>
       <% for (i = 0; i < countriesData.length; i++){ %>
         <%- include('countryCard', {country: countriesData[i]}); -%>

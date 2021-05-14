@@ -7,10 +7,10 @@ const bodyParser = require('body-parser');
 const ISO6391 = require('iso-639-1');
 //const countriesQuery = require('countries-code');
 const countriesQuery = require("i18n-iso-countries");
+const renderCountries = require(__dirname + "/renderCountries.js");
 
 // Initialize our app
-let app = express();
-let redirect = false; // Used to check if we've been redirected to get rather.
+const app = express();
 
 
 app.set("view engine", "ejs");  // Making ejs the view engine so we can render ejs pages instead of html pages.
@@ -20,13 +20,13 @@ app.use(bodyParser.urlencoded({extended: true})); // Allowing us to easily parse
 
 
 app.get("/", function (req, res) {
-  console.log(redirect);
-  if (redirect) {
+  console.log(global.redirect);
+  if (global.redirect) {
     console.log("redirect");
-    redirect = false;
+    global.redirect = false;
     res.render("index", {error: '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Try Again!</strong> You tried to enter something invalid. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'});
   } else {
-    redirect = false;
+    global.redirect = false;
     res.render("index", {error: ""});
   }
 });
@@ -34,51 +34,51 @@ app.get("/", function (req, res) {
 app.get("/all", function (req, res) {
   fetch('https://restcountries.eu/rest/v2/all')
   .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-  .then(data => renderAllCountries(data, res));  // The function renderWebpage is run with the retrieved JSON data.
+  .then(data => renderCountries.renderAllCountries(data, res));  // The function renderWebpage is run with the retrieved JSON data.
 });
 
 app.get("/by-name", function (req, res) {
-  redirect = true;
+  global.redirect = true;
   res.redirect("/");
 });
 
 app.get("/by-full-name", function (req, res) {
-  redirect = true;
+  global.redirect = true;
   res.redirect("/");
 });
 
 app.get("/by-country-code", function (req, res) {
-  redirect = true;
+  global.redirect = true;
   res.redirect("/");
 });
 
 app.get("/by-currency", function (req, res) {
-  redirect = true;
+  global.redirect = true;
   res.redirect("/");
 });
 
 app.get("/by-language", function (req, res) {
-  redirect = true;
+  global.redirect = true;
   res.redirect("/");
 });
 
 app.get("/by-capital-city", function (req, res) {
-  redirect = true;
+  global.redirect = true;
   res.redirect("/");
 });
 
 app.get("/by-calling-code", function (req, res) {
-  redirect = true;
+  global.redirect = true;
   res.redirect("/");
 });
 
 app.get("/by-region", function (req, res) {
-  redirect = true;
+  global.redirect = true;
   res.redirect("/");
 });
 
 app.get("/by-regional-bloc", function (req, res) {
-  redirect = true;
+  global.redirect = true;
   res.redirect("/");
 });
 
@@ -86,7 +86,7 @@ app.get("/by-regional-bloc", function (req, res) {
 app.post("/all", function (req, res) {
   fetch('https://restcountries.eu/rest/v2/all')
   .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-  .then(data => renderAllCountries(data, res));
+  .then(data => renderCountries.renderAllCountries(data, res));
 });
 
 app.post("/by-name", function (req, res) {
@@ -104,7 +104,7 @@ app.post("/by-name", function (req, res) {
 
     fetch(url)
     .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-    .then(data => renderCountries(data, res, "Search by name", searchTerm));
+    .then(data => renderCountries.renderCountries(data, res, "Search by name", searchTerm));
   }
 });
 
@@ -112,7 +112,7 @@ app.post("/by-full-name", function (req, res) {
   let url = 'https://restcountries.eu/rest/v2/name/';
   let searchTerm = req.body.byFullName;
   if (searchTerm === "") {
-    redirect = true;
+    global.redirect = true;
     res.redirect("/");
   } else {
     let country = encodeURIComponent(searchTerm);
@@ -121,7 +121,7 @@ app.post("/by-full-name", function (req, res) {
 
     fetch(url)
     .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-    .then(data => renderCountries(data, res, "Search by full name", searchTerm));
+    .then(data => renderCountries.renderCountries(data, res, "Search by full name", searchTerm));
   }
 });
 
@@ -130,7 +130,7 @@ app.post("/by-country-code", function (req, res) {
   let searchTerm = req.body.byCountryCode;
   let code = encodeURIComponent(searchTerm);
   if (searchTerm === "") {
-    redirect = true;
+    global.redirect = true;
     res.redirect("/");
   } else {
     url = url + code;
@@ -138,7 +138,7 @@ app.post("/by-country-code", function (req, res) {
 
     fetch(url)
     .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-    .then(data => renderCountriesByCode(data, res, code));
+    .then(data => renderCountries.renderCountriesByCode(data, res, code));
   }
 });
 
@@ -146,7 +146,7 @@ app.post("/by-currency", function (req, res) {
   let url = 'https://restcountries.eu/rest/v2/currency/';
   let searchTerm = req.body.byCurrency;
   if (searchTerm === "") {
-    redirect = true;
+    global.redirect = true;
     res.redirect("/");
   } else {
     let currency = encodeURIComponent(req.body.byCurrency);
@@ -155,7 +155,7 @@ app.post("/by-currency", function (req, res) {
 
     fetch(url)
     .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-    .then(data => renderCountries(data, res, "Search by currency", searchTerm));
+    .then(data => renderCountries.renderCountries(data, res, "Search by currency", searchTerm));
   }
 });
 
@@ -163,7 +163,7 @@ app.post("/by-language", function (req, res) {
   let url = 'https://restcountries.eu/rest/v2/lang/';
   let searchTerm = req.body.byLanguage;
   if (searchTerm === "") {
-    redirect = true;
+    global.redirect = true;
     res.redirect("/");
   } else {
     let languageName = ISO6391.getCode(searchTerm);
@@ -174,7 +174,7 @@ app.post("/by-language", function (req, res) {
 
       fetch(url)
       .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-      .then(data => renderCountries(data, res, "Search by language", searchTerm));
+      .then(data => renderCountries.renderCountries(data, res, "Search by language", searchTerm));
     } else {
       let language = encodeURIComponent(ISO6391.getCode(searchTerm));
       url = url + language;
@@ -182,7 +182,7 @@ app.post("/by-language", function (req, res) {
 
       fetch(url)
       .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-      .then(data => renderCountries(data, res, "Search by language", searchTerm));
+      .then(data => renderCountries.renderCountries(data, res, "Search by language", searchTerm));
     }
   }
 });
@@ -191,7 +191,7 @@ app.post("/by-capital-city", function (req, res) {
   let url = 'https://restcountries.eu/rest/v2/capital/';
   let searchTerm = req.body.byCapitalCity;
   if (searchTerm === "") {
-    redirect = true;
+    global.redirect = true;
     res.redirect("/");
   } else {
     let capitalCity = encodeURIComponent(searchTerm);
@@ -200,7 +200,7 @@ app.post("/by-capital-city", function (req, res) {
 
     fetch(url)
     .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-    .then(data => renderCountries(data, res, "Search by capital city", searchTerm));
+    .then(data => renderCountries.renderCountries(data, res, "Search by capital city", searchTerm));
   }
 });
 
@@ -208,7 +208,7 @@ app.post("/by-calling-code", function (req, res) {
   let url = 'https://restcountries.eu/rest/v2/callingcode/';
   let searchTerm = req.body.byCallingCode
   if (searchTerm === "") {
-    redirect = true;
+    global.redirect = true;
     res.redirect("/");
   } else {
     let callingCode = encodeURIComponent(searchTerm);
@@ -217,7 +217,7 @@ app.post("/by-calling-code", function (req, res) {
 
     fetch(url)
     .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-    .then(data => renderCountries(data, res, "Search by calling code", searchTerm));
+    .then(data => renderCountries.renderCountries(data, res, "Search by calling code", searchTerm));
   }
 });
 
@@ -225,7 +225,7 @@ app.post("/by-region", function (req, res) {
   let url = 'https://restcountries.eu/rest/v2/region/';
   let searchTerm = req.body.byRegion;
   if (searchTerm === "") {
-    redirect = true;
+    global.redirect = true;
     res.redirect("/");
   } else {
     let region = encodeURIComponent(searchTerm);
@@ -234,7 +234,7 @@ app.post("/by-region", function (req, res) {
 
     fetch(url)
     .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-    .then(data => renderCountries(data, res, "Search by region", searchTerm));
+    .then(data => renderCountries.renderCountries(data, res, "Search by region", searchTerm));
   }
 });
 
@@ -242,7 +242,7 @@ app.post("/by-regional-bloc", function (req, res) {
   let url = 'https://restcountries.eu/rest/v2/regionalbloc/';
   let searchTerm = req.body.byRegionalBloc
   if (searchTerm === "") {
-    redirect = true;
+    global.redirect = true;
     res.redirect("/");
   } else {
     let regionalBloc = encodeURIComponent(searchTerm);
@@ -251,38 +251,10 @@ app.post("/by-regional-bloc", function (req, res) {
 
     fetch(url)
     .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
-    .then(data => renderCountries(data, res, "Search by regional bloc", searchTerm));
+    .then(data => renderCountries.renderCountries(data, res, "Search by regional bloc", searchTerm));
   }
 });
 
-
-
-function renderAllCountries(completeData, response) {
-  if (completeData.status === undefined) {
-    response.render("countriesSearch", {langs: ISO6391, countryCodes: countriesQuery, search: "All Countries", searched: "", countriesData: completeData});
-  } else {
-    redirect = true;
-    response.redirect("/");
-  }
-}
-
-function renderCountries(completeData, response, searchType, searchTerm) {
-  if (completeData.status === undefined) {
-    response.render("countriesSearch", {langs: ISO6391, countryCodes: countriesQuery, search: searchType, searched: searchTerm, countriesData: completeData});
-  } else {
-    redirect = true;
-    response.redirect("/");
-  }
-}
-
-function renderCountriesByCode(completeData, response, countryCode) {
-  if (completeData.status === undefined) {
-    response.render("countriesSearch", {langs: ISO6391, countryCodes: countriesQuery, search: "Search country by code", searched: countryCode, countriesData: completeData});
-  } else {
-    redirect = true;
-    response.redirect("/");
-  }
-}
 
 
 
@@ -293,5 +265,6 @@ function renderCountriesByCode(completeData, response, countryCode) {
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("Server is running on port 3000.");
-  console.log(redirect);
+  global.redirect = false;
+  console.log(global.redirect);
 });
