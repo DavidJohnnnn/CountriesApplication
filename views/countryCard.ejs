@@ -22,46 +22,95 @@
   </div>
   <div class="container-fluid minusBox cardGone">
     <small class="text-muted">
+
       <p class="card-text">
-        <%= country.name %> has the following top level domain(s): <br>
-        <% for (k = 0; k < country.topLevelDomain.length; k++) { %>
-          <%= country.topLevelDomain[k] %>
-          <br>
-        <% } %>
-      </p>
-      <p class="card-text">
-        The two letter country code for <%= country.name %> is <%= country.alpha2Code %>. (This is the ISO 3166-1 Alpha 2 code)
+
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.alpha2Code %>. (ISO 3166-1 Alpha 2 code)">
+          Two Letter Country Code
+        </button>
+
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.alpha3Code %>. (ISO 3166-1 Alpha 3 code)">
+          Three Letter Country Code
+        </button>
+
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.numericCode %>">
+          Country Code
+        </button>
+
         <br>
-        The three letter country code for <%= country.name %> is <%= country.alpha3Code %>. (This is the ISO 3166-1 Alpha 3 code)
+
       </p>
       <p class="card-text">
-        <%= country.name %> has the following calling code(s):
-        <% for (l = 0; l < country.callingCodes.length; l++) { %>
-          <br>+<%= country.callingCodes[l] %>
-        <% } %>
+
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title='<% for (k = 0; k < country.topLevelDomain.length; k++) { %>
+              <% if (k === country.topLevelDomain.length - 1) { %>
+                <%= country.topLevelDomain[k] %>
+              <% } else { %>
+                <%= country.topLevelDomain[k] %>,
+              <% } %>
+          <% } %>'>
+          Top Level Domain(s)
+        </button>
+
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title='<% for (l = 0; l < country.callingCodes.length; l++) { %>
+          +<%= country.callingCodes[l] %>
+          <% if (l < country.callingCodes.length - 1) { %>
+            <br>
+          <% } %>
+          <% } %>'>
+          Calling Code(s)
+        </button>
       </p>
+
       <p class="card-text">
+
         <% if (country.capital !== "") { %>
-          The capital of <%= country.name %> is <%= country.capital %>.
+          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.capital %>">
+            Capital
+          </button>
         <% } %>
+
         <% if (country.region !== "") { %>
-          <br>Region: <%= country.region %>.
+          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.region %>">
+            Region
+          </button>
         <% } %>
+
         <% if (country.subregion !== "") { %>
-          <br>Subregion: <%= country.subregion %>.
+          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.subregion %>">
+            Subregion
+          </button>
         <% } %>
 
-        <br>There are approximately <%= country.population %> people living there.
-
+        <br>
+        <br>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="There are approximately <%= country.population %> people living there.">
+          Population
+        </button>
         <% if (country.demonym !== "") { %>
-          The people are referred to with the demonym <%= country.demonym %>.
+          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.demonym %>">
+            Demonym
+          </button>
         <% } %>
-        The area of this country is <%= country.area %> square kilometers.
-        <% if (country.gini !== "" ) { %>
-        The gini coefficient of this country is <%= country.gini %>.
+          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.area %> square kilometers">
+            Country Area
+          </button>
+        <% if (country.gini !== "" && country.gini !== null ) { %>
+          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.gini %>">
+            Gini Coefficient
+          </button>
         <% } %>
+
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title='This country uses the following currencies:
+        <% for (n = 0; n < country.currencies.length; n++) { %>
+          <br>
+          <%= country.currencies[n].name %> (<%= country.currencies[n].code %>, <%= country.currencies[n].symbol %>)
+        <% } %>'>
+          Currencies
+        </button>
       </p>
       <p class="card-text">
+
         <% if (country.borders.length > 0) { %>
           This country borders the following countries:
           <% for (m = 0; m < country.borders.length; m++ ) { %>
@@ -71,15 +120,9 @@
         <% } %>
       </p>
       <p class="card-text">
-        The name of this country is natively written as: <%= country.nativeName %>. This country's numeric code is <%= country.numericCode %>.
+
       </p>
-      <p class="card-text">
-        This country uses the following currencies:
-        <% for (n = 0; n < country.currencies.length; n++) { %>
-          <br>
-          <%= country.currencies[n].name %> (Currency code: <%= country.currencies[n].code %>, <%= country.currencies[n].symbol %>)
-        <% } %>
-      </p>
+
       <p class="card-text">
         The people of this country speak the following language(s):
         <% for (a = 0; a < country.languages.length; a++) { %>
