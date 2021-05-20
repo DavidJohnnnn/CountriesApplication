@@ -4,17 +4,15 @@
   <div class="card-body">
     <h5 class="card-title"><%= country.name %></h5>
     <p class="card-text">
-      <% for (j = 0; j < country.altSpellings.length; j++){ %>
-        <%if (j == 0) { %>
+      <%
+      let firstElement = true;
+      country.altSpellings.forEach(function (element) {
+        if (firstElement) {
+          firstElement = false; %>
           Can also be identified as:
         <% } %>
-        <% if (j < country.altSpellings.length - 1 ) { %>
-          <%= country.altSpellings[j] %>,
-        <% } %>
-        <% if (j === country.altSpellings.length - 1) { %>
-          <%= country.altSpellings[j] %>
-        <% } %>
-      <% } %>
+          <br>- <%= element %>
+      <% }); %>
     </p>
   </div>
   <div class="container-fluid plusBox cardThere">
@@ -25,93 +23,125 @@
 
       <p class="card-text">
 
-        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.alpha2Code %>. (ISO 3166-1 Alpha 2 code)">
-          Two Letter Country Code
-        </button>
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.alpha2Code %>. (ISO 3166-1 Alpha 2 code)">
+          <button type="button" class="btn btn-outline-success" disabled>
+            Two Letter Country Code
+          </button>
+        </span>
 
-        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.alpha3Code %>. (ISO 3166-1 Alpha 3 code)">
-          Three Letter Country Code
-        </button>
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.alpha3Code %>. (ISO 3166-1 Alpha 3 code)">
+          <button type="button" class="btn btn-outline-success" disabled>
+            Three Letter Country Code
+          </button>
+        </span>
 
-        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.numericCode %>">
-          Country Code
-        </button>
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.numericCode %>">
+          <button type="button" class="btn btn-outline-success" disabled>
+            Country Code
+          </button>
+        </span>
 
         <br>
 
       </p>
       <p class="card-text">
 
-        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title='<% for (k = 0; k < country.topLevelDomain.length; k++) { %>
+        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true"
+        title='<% for (k = 0; k < country.topLevelDomain.length; k++) { %>
               <% if (k === country.topLevelDomain.length - 1) { %>
                 <%= country.topLevelDomain[k] %>
               <% } else { %>
                 <%= country.topLevelDomain[k] %>,
               <% } %>
           <% } %>'>
-          Top Level Domain(s)
-        </button>
+          <button type="button" class="btn btn-outline-success" disabled>
+            Top Level Domain(s)
+          </button>
+        </span>
 
-        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title='<% for (l = 0; l < country.callingCodes.length; l++) { %>
+        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true"
+        title='<% for (l = 0; l < country.callingCodes.length; l++) { %>
           +<%= country.callingCodes[l] %>
           <% if (l < country.callingCodes.length - 1) { %>
             <br>
           <% } %>
           <% } %>'>
-          Calling Code(s)
-        </button>
+          <button type="button" class="btn btn-outline-success" disabled>
+            Calling Code(s)
+          </button>
+        </span>
       </p>
 
       <p class="card-text">
 
         <% if (country.capital !== "") { %>
-          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.capital %>">
-            Capital
-          </button>
+          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.capital %>">
+            <button type="button" class="btn btn-outline-success" disabled>
+              Capital
+            </button>
+          </span>
         <% } %>
 
         <% if (country.region !== "") { %>
-          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.region %>">
-            Region
-          </button>
+          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.region %>">
+            <button type="button" class="btn btn-outline-success" disabled>
+              Region
+            </button>
+          </span>
         <% } %>
 
         <% if (country.subregion !== "") { %>
-          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.subregion %>">
-            Subregion
-          </button>
+          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.subregion %>">
+            <button type="button" class="btn btn-outline-success" disabled>
+              Subregion
+            </button>
+          </span>
         <% } %>
 
         <br>
         <br>
-        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="There are approximately <%= country.population %> people living there.">
-          Population
-        </button>
-        <% if (country.demonym !== "") { %>
-          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.demonym %>">
-            Demonym
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="There are approximately <%= country.population %> people living there.">
+          <button type="button" class="btn btn-outline-success" disabled>
+            Population
           </button>
+        </span>
+
+        <% if (country.demonym !== "") { %>
+          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.demonym %>">
+            <button type="button" class="btn btn-outline-success" disabled>
+              Demonym
+            </button>
+          </span>
         <% } %>
-          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.area %> square kilometers">
+
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.area %> square kilometers">
+          <button type="button" class="btn btn-outline-success" disabled>
             Country Area
           </button>
+        </span>
+
         <% if (country.gini !== "" && country.gini !== null ) { %>
-          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="<%= country.gini %>">
-            Gini Coefficient
-          </button>
+          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.gini %>">
+            <button type="button" class="btn btn-outline-success" disabled>
+              Gini Coefficient
+            </button>
+          </span>
         <% } %>
 
-        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" title='This country uses the following currencies:
+        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='This country uses the following currencies:
         <% for (n = 0; n < country.currencies.length; n++) { %>
-          <br>
-          <%= country.currencies[n].name %> (<%= country.currencies[n].code %>, <%= country.currencies[n].symbol %>)
+          <br><%= country.currencies[n].name %> (<%= country.currencies[n].code %>, <%= country.currencies[n].symbol %>)
         <% } %>'>
-          Currencies
-        </button>
+          <button type="button" class="btn btn-outline-success" disabled>
+            Currencies
+          </button>
+        </span>
+
       </p>
       <p class="card-text">
 
         <% if (country.borders.length > 0) { %>
+
           This country borders the following countries:
           <% for (m = 0; m < country.borders.length; m++ ) { %>
             <br>

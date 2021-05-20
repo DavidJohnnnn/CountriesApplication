@@ -14,7 +14,7 @@ img {
 }
 
 .card-img-top {
-  height: 100px;
+  height: 200px;
   width: auto;
   object-fit: contain;
 }
@@ -56,18 +56,24 @@ img {
   overflow: hidden;
 }
 
+.fas.fa-plus-circle {
+  font-size: 2rem;
+}
+
 .minusBox {
   padding-left: 30px;
-  transition: all 1000ms cubic-bezier(0.785, 0.135, 0.150, 0.860);
+  transition: all 2000ms linear;
   overflow: hidden;
 }
 
+.fas.fa-minus-circle {
+  font-size: 2rem;
+}
+
 .cardGone {
-  transform: translate3d(100px, 0, 100px);
   max-height: 0px;
 }
 
 .cardThere {
-  transform: translate3d(0, 0, 0);
-  max-height: 2000px;
+  max-height: 1000px;
 }
