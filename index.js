@@ -32,7 +32,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/all", function (req, res) {
-  fetch('https://restcountries.eu/rest/v2/all')
+  fetch('https://restcountries.com/v3.1/all')
   .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
   .then(data => renderCountries.renderAllCountries(data, res));  // The function renderWebpage is run with the retrieved JSON data.
 });
@@ -84,13 +84,13 @@ app.get("/by-regional-bloc", function (req, res) {
 
 
 app.post("/all", function (req, res) {
-  fetch('https://restcountries.eu/rest/v2/all')
+  fetch('https://restcountries.com/v3.1/all')
   .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
   .then(data => renderCountries.renderAllCountries(data, res));
 });
 
 app.post("/by-name", function (req, res) {
-  let url = 'https://restcountries.eu/rest/v2/name/';
+  let url = 'https://restcountries.com/v3.1/name/';
   let searchTerm = req.body.byName;
   if (searchTerm === "") {
     redirect = true;
@@ -109,7 +109,7 @@ app.post("/by-name", function (req, res) {
 });
 
 app.post("/by-full-name", function (req, res) {
-  let url = 'https://restcountries.eu/rest/v2/name/';
+  let url = 'https://restcountries.com/v3.1/name/';
   let searchTerm = req.body.byFullName;
   if (searchTerm === "") {
     global.redirect = true;
@@ -126,7 +126,7 @@ app.post("/by-full-name", function (req, res) {
 });
 
 app.post("/by-country-code", function (req, res) {
-  let url = 'https://restcountries.eu/rest/v2/alpha/';
+  let url = 'https://restcountries.com/v3.1/alpha/';
   let searchTerm = req.body.byCountryCode;
   let code = encodeURIComponent(searchTerm);
   if (searchTerm === "") {
@@ -143,7 +143,7 @@ app.post("/by-country-code", function (req, res) {
 });
 
 app.post("/by-currency", function (req, res) {
-  let url = 'https://restcountries.eu/rest/v2/currency/';
+  let url = 'https://restcountries.com/v3.1/currency/';
   let searchTerm = req.body.byCurrency;
   if (searchTerm === "") {
     global.redirect = true;
@@ -160,7 +160,7 @@ app.post("/by-currency", function (req, res) {
 });
 
 app.post("/by-language", function (req, res) {
-  let url = 'https://restcountries.eu/rest/v2/lang/';
+  let url = 'https://restcountries.com/v3.1/lang/';
   let searchTerm = req.body.byLanguage;
   if (searchTerm === "") {
     global.redirect = true;
@@ -188,7 +188,7 @@ app.post("/by-language", function (req, res) {
 });
 
 app.post("/by-capital-city", function (req, res) {
-  let url = 'https://restcountries.eu/rest/v2/capital/';
+  let url = 'https://restcountries.com/v3.1/capital/';
   let searchTerm = req.body.byCapitalCity;
   if (searchTerm === "") {
     global.redirect = true;
@@ -205,7 +205,7 @@ app.post("/by-capital-city", function (req, res) {
 });
 
 app.post("/by-calling-code", function (req, res) {
-  let url = 'https://restcountries.eu/rest/v2/callingcode/';
+  let url = 'https://restcountries.com/v3.1/callingcode/';
   let searchTerm = req.body.byCallingCode
   if (searchTerm === "") {
     global.redirect = true;
@@ -222,7 +222,7 @@ app.post("/by-calling-code", function (req, res) {
 });
 
 app.post("/by-region", function (req, res) {
-  let url = 'https://restcountries.eu/rest/v2/region/';
+  let url = 'https://restcountries.com/v3.1/region/';
   let searchTerm = req.body.byRegion;
   if (searchTerm === "") {
     global.redirect = true;
@@ -239,7 +239,7 @@ app.post("/by-region", function (req, res) {
 });
 
 app.post("/by-regional-bloc", function (req, res) {
-  let url = 'https://restcountries.eu/rest/v2/regionalbloc/';
+  let url = 'https://restcountries.com/v3.1/regionalbloc/';
   let searchTerm = req.body.byRegionalBloc
   if (searchTerm === "") {
     global.redirect = true;
