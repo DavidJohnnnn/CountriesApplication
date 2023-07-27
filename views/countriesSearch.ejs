@@ -9,7 +9,9 @@
     <% if (search === "Search country by code") { %>
       <%- include('countryCard', {country: countriesData}); -%>
     <% } else { %>
-      <% for (i = 0; i < countriesData.length; i++){ %>
+      <% for (i = 0; i < Object.keys(countriesData).length; i++){ %>
+        <% console.log("Works here"); %>
+
         <%- include('countryCard', {country: countriesData[i]}); -%>
       <% } %>
     <% } %>
