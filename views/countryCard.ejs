@@ -1,8 +1,9 @@
 <div class="card mb-3">
   <br>
   <img class="card-img-top" src="<%= country.flag %>" alt="Card image cap">
+
   <div class="card-body">
-    <h5 class="card-title"><%= country.name %></h5>
+    <h5 class="card-title"><%= country.name.common %></h5>
     <p class="card-text">
       <%
       let firstElement = true;
@@ -23,19 +24,21 @@
 
       <p class="card-text">
 
-        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.alpha2Code %>. (ISO 3166-1 Alpha 2 code)">
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.cca2 %>. (ISO 3166-1 Alpha 2 code)">
           <button type="button" class="btn btn-outline-success" disabled>
             Two Letter Country Code
           </button>
         </span>
 
-        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.alpha3Code %>. (ISO 3166-1 Alpha 3 code)">
+        <% console.log("Works here"); %>
+
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.cca3 %>. (ISO 3166-1 Alpha 3 code)">
           <button type="button" class="btn btn-outline-success" disabled>
             Three Letter Country Code
           </button>
         </span>
 
-        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.numericCode %>">
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.ccn3 %>">
           <button type="button" class="btn btn-outline-success" disabled>
             Country Code
           </button>
@@ -45,13 +48,13 @@
 
       </p>
       <p class="card-text">
-
+        <% console.log(country.tld) -%>
         <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true"
-        title='<% for (k = 0; k < country.topLevelDomain.length; k++) { %>
-              <% if (k === country.topLevelDomain.length - 1) { %>
-                <%= country.topLevelDomain[k] %>
+        title='<% for (k = 0; k < Object.keys(country.tld).length; k++) { %>
+              <% if (k === Object.keys(country.tld).length - 1) { %>
+                <%= country.tld[k] %>
               <% } else { %>
-                <%= country.topLevelDomain[k] %>,
+                <%= country.tld[k] %>,
               <% } %>
           <% } %>'>
           <button type="button" class="btn btn-outline-success" disabled>
@@ -60,10 +63,10 @@
         </span>
 
         <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true"
-        title='<% for (l = 0; l < country.callingCodes.length; l++) { %>
-          +<%= country.callingCodes[l] %>
-          <% if (l < country.callingCodes.length - 1) { %>
-            <br>
+        title='<% for (l = 0; l < Object.keys(country.idd.suffixes).length; l++) { %>
+          <%= country.idd.root + country.idd.suffixes[l] %>
+          <% if (l < Object.keys(country.idd.suffixes).length - 1) { %>
+            <br />
           <% } %>
           <% } %>'>
           <button type="button" class="btn btn-outline-success" disabled>
@@ -72,10 +75,12 @@
         </span>
       </p>
 
-      <p class="card-text">
+      <% console.log("Works here 2"); %>
 
-        <% if (country.capital !== "") { %>
-          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.capital %>">
+
+      <p class="card-text">
+        <% if (country.capital[0] !== "") { %>
+          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.capital[0] %>">
             <button type="button" class="btn btn-outline-success" disabled>
               Capital
             </button>
@@ -106,13 +111,18 @@
           </button>
         </span>
 
+        <% console.log("Works here 3"); %>
+
+
+        <!-- <% /* %>
         <% if (country.demonym !== "") { %>
-          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.demonym %>">
+          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.demonyms %>">
             <button type="button" class="btn btn-outline-success" disabled>
               Demonym
             </button>
           </span>
         <% } %>
+        <% */ %> -->
 
         <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.area %> square kilometers">
           <button type="button" class="btn btn-outline-success" disabled>
@@ -120,6 +130,7 @@
           </button>
         </span>
 
+        <!-- <% /* %>
         <% if (country.gini !== "" && country.gini !== null ) { %>
           <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.gini %>">
             <button type="button" class="btn btn-outline-success" disabled>
@@ -127,23 +138,24 @@
             </button>
           </span>
         <% } %>
+        <% */ %> -->
 
         <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='This country uses the following currencies:
-        <% for (n = 0; n < country.currencies.length; n++) { %>
-          <br><%= country.currencies[n].name %> (<%= country.currencies[n].code %>, <%= country.currencies[n].symbol %>)
-        <% } %>'>
+        <% Object.keys(country.currencies).forEach(key => { %>
+            <br>- <%= country.currencies[key].name %> (<%= key %>, <%= country.currencies[key].symbol %>)
+        <% }); %>'>
           <button type="button" class="btn btn-outline-success" disabled>
             Currencies
           </button>
         </span>
-
       </p>
+
+      <% console.log("Works here 4"); %>
+
       <p class="card-text">
-
-        <% if (country.borders.length > 0) { %>
-
+        <% if (Object.keys(country.borders).length > 0) { %>
           This country borders the following countries:
-          <% for (m = 0; m < country.borders.length; m++ ) { %>
+          <% for (m = 0; m < Object.keys(country.borders).length; m++ ) { %>
             <br>
             <%= countryCodes.getName(country.borders[m], "en", {select: "official"}) %>
           <% } %>
@@ -155,12 +167,15 @@
 
       <p class="card-text">
         The people of this country speak the following language(s):
-        <% for (a = 0; a < country.languages.length; a++) { %>
-          <br>
-          <%= country.languages[a].name %> (native name: <%= country.languages[a].nativeName %>)
+        <% Object.keys(country.languages).forEach(key => { %>
+          <br /><%= country.languages[key] %> (<%= key %>)
         <% } %>
       </p>
 
+      <% console.log("Works here 5"); %>
+
+
+      <!-- <% /* %>
       <p class="card-text">
         The name of this country can be translated into the following languages:
         <% for (const language in country.translations) { %>
@@ -168,12 +183,14 @@
           <%= langs.getName(language) %>: <%= country.translations[language] %>
         <% } %>
       </p>
+      <% */ %> -->
 
+      <!-- <% /* %>
       <p class="card-text">
-
         <a class="btn btn-primary" href="<%= 'https://www.google.com/maps/place/' + country.latlng[0] + ',' + country.latlng[1]%>" role="button">Google Map Location</a>
-
       </p>
+      <% */ %> -->
+
     </small>
     <div style="text-align: center;">
       <i class="fas fa-minus-circle"></i>
@@ -181,3 +198,5 @@
   </div>
   <br>
 </div>
+
+<% console.log("Works here 6"); %>
