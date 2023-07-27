@@ -10,7 +10,7 @@
       <%- include('countryCard', {country: countriesData}); -%>
     <% } else { %>
       <% for (i = 0; i < Object.keys(countriesData).length; i++){ %>
-        <% console.log("Works here"); %>
+        <% console.log("Works here 2"); %>
 
         <%- include('countryCard', {country: countriesData[i]}); -%>
       <% } %>
