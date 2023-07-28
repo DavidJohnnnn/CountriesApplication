@@ -49,30 +49,40 @@
       </p>
       <p class="card-text">
         <% console.log(country.tld) -%>
-        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true"
-        title='<% for (k = 0; k < Object.keys(country.tld).length; k++) { %>
-              <% if (k === Object.keys(country.tld).length - 1) { %>
-                <%= country.tld[k] %>
-              <% } else { %>
-                <%= country.tld[k] %>,
-              <% } %>
+        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='
+          <% for (k = 0; k < Object.keys(country.tld).length; k++) { %>
+            <% if (k === Object.keys(country.tld).length - 1) { %>
+              <%= country.tld[k] %>
+            <% } else { %>
+              <%= country.tld[k] %>,
+            <% } %>
           <% } %>'>
           <button type="button" class="btn btn-outline-success" disabled>
             Top Level Domain(s)
           </button>
         </span>
 
-        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true"
-        title='<% for (l = 0; l < Object.keys(country.idd.suffixes).length; l++) { %>
-          <%= country.idd.root + country.idd.suffixes[l] %>
-          <% if (l < Object.keys(country.idd.suffixes).length - 1) { %>
-            <br />
-          <% } %>
+        <% if (Object.keys(country.idd).length > 0 && typeof(country.idd.suffixes) === 'undefined') { %>
+        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='<%= country.idd.root %> <br />'>
+          <button type="button" class="btn btn-outline-success" disabled>
+            Calling Code(s)
+          </button>
+        </span>
+        <% } %>
+
+        <% if (Object.keys(country.idd).length > 0 && typeof(country.idd.suffixes) !== 'undefined') { %>
+        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='
+          <% for (l = 0; l < Object.keys(country.idd.suffixes).length; l++) { %>
+            <%= country.idd.root + country.idd.suffixes[l] %>
+            <% if (l < Object.keys(country.idd.suffixes).length - 1) { %>
+              <br />
+            <% } %>
           <% } %>'>
           <button type="button" class="btn btn-outline-success" disabled>
             Calling Code(s)
           </button>
         </span>
+        <% } %>
       </p>
 
       <% console.log("Works here 2"); %>
@@ -198,5 +208,3 @@
   </div>
   <br>
 </div>
-
-<% console.log("Works here 6"); %>
