@@ -70,7 +70,7 @@
         </span>
         <% } %>
 
-        <% if (Object.keys(country.idd).length > 0 && typeof(country.idd.suffixes) !== 'undefined') { %>
+        <% else if (Object.keys(country.idd).length > 0 && typeof(country.idd.suffixes) !== 'undefined') { %>
         <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='
           <% for (l = 0; l < Object.keys(country.idd.suffixes).length; l++) { %>
             <%= country.idd.root + country.idd.suffixes[l] %>
@@ -89,7 +89,7 @@
 
 
       <p class="card-text">
-        <% if (country.capital[0] !== "") { %>
+        <% if (country.capital !== 'undefined' && country.capital[0] !== "") { %>
           <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.capital[0] %>">
             <button type="button" class="btn btn-outline-success" disabled>
               Capital
@@ -97,7 +97,7 @@
           </span>
         <% } %>
 
-        <% if (country.region !== "") { %>
+        <% if (country.region !== "undefined" && country.region !== "") { %>
           <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.region %>">
             <button type="button" class="btn btn-outline-success" disabled>
               Region
@@ -105,7 +105,7 @@
           </span>
         <% } %>
 
-        <% if (country.subregion !== "") { %>
+        <% if (country.subregion !== "undefined" && country.subregion !== "") { %>
           <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.subregion %>">
             <button type="button" class="btn btn-outline-success" disabled>
               Subregion
@@ -150,27 +150,30 @@
         <% } %>
         <% */ %> -->
 
-        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='This country uses the following currencies:
-        <% Object.keys(country.currencies).forEach(key => { %>
-            <br>- <%= country.currencies[key].name %> (<%= key %>, <%= country.currencies[key].symbol %>)
-        <% }); %>'>
-          <button type="button" class="btn btn-outline-success" disabled>
-            Currencies
-          </button>
-        </span>
+        <% if (country.currencies !== "undefined" && country.currencies !== "") { %>
+          <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='This country uses the following currencies:
+          <% Object.keys(country.currencies).forEach(key => { %>
+              <br>- <%= country.currencies[key].name %> (<%= key %>, <%= country.currencies[key].symbol %>)
+          <% }); %>'>
+            <button type="button" class="btn btn-outline-success" disabled>
+              Currencies
+            </button>
+          </span>
+        <% } %>
       </p>
 
       <% console.log("Works here 4"); %>
 
-      <p class="card-text">
-        <% if (Object.keys(country.borders).length > 0) { %>
+      <% if (country.borders !== "undefined" && country.borders !== "" && Object.keys(country.borders).length > 0) { %>
+        <p class="card-text">
           This country borders the following countries:
           <% for (m = 0; m < Object.keys(country.borders).length; m++ ) { %>
             <br>
             <%= countryCodes.getName(country.borders[m], "en", {select: "official"}) %>
           <% } %>
-        <% } %>
-      </p>
+        </p>
+      <% } %>
+
       <p class="card-text">
 
       </p>
