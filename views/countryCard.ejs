@@ -21,6 +21,7 @@
   </div>
   <div class="container-fluid minusBox cardGone">
     <small class="text-muted">
+      <!-- <% /* %>
 
       <p class="card-text">
 
@@ -61,6 +62,8 @@
             Top Level Domain(s)
           </button>
         </span>
+
+
 
         <% if (Object.keys(country.idd).length > 0 && typeof(country.idd.suffixes) === 'undefined') { %>
         <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='<%= country.idd.root %> <br />'>
@@ -123,32 +126,12 @@
 
         <% console.log("Works here 3"); %>
 
-
-        <!-- <% /* %>
-        <% if (country.demonym !== "") { %>
-          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.demonyms %>">
-            <button type="button" class="btn btn-outline-success" disabled>
-              Demonym
-            </button>
-          </span>
-        <% } %>
-        <% */ %> -->
-
         <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.area %> square kilometers">
           <button type="button" class="btn btn-outline-success" disabled>
             Country Area
           </button>
         </span>
 
-        <!-- <% /* %>
-        <% if (country.gini !== "" && country.gini !== null ) { %>
-          <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.gini %>">
-            <button type="button" class="btn btn-outline-success" disabled>
-              Gini Coefficient
-            </button>
-          </span>
-        <% } %>
-        <% */ %> -->
 
         <% if (country.currencies !== "undefined" && country.currencies !== "") { %>
           <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='This country uses the following currencies:
@@ -163,8 +146,9 @@
       </p>
 
       <% console.log("Works here 4"); %>
+      <% */ %> -->
 
-      <% if (country.borders !== "undefined" && country.borders !== "" && Object.keys(country.borders).length > 0) { %>
+      <% if (typeof country.borders !== "undefined" && country.borders !== "") { %>
         <p class="card-text">
           This country borders the following countries:
           <% for (m = 0; m < Object.keys(country.borders).length; m++ ) { %>
@@ -178,31 +162,16 @@
 
       </p>
 
-      <p class="card-text">
-        The people of this country speak the following language(s):
-        <% Object.keys(country.languages).forEach(key => { %>
-          <br /><%= country.languages[key] %> (<%= key %>)
-        <% } %>
-      </p>
+      <% if (typeof country.languages !== 'undefined' && country.languages !== "") { %>
+        <p class="card-text">
+          The people of this country speak the following language(s):
+          <% Object.keys(country.languages).forEach(key => { %>
+            <br /><%= country.languages[key] %> (<%= key %>)
+          <% }); %>
+        </p>
+      <% } %>
 
-      <% console.log("Works here 5"); %>
 
-
-      <!-- <% /* %>
-      <p class="card-text">
-        The name of this country can be translated into the following languages:
-        <% for (const language in country.translations) { %>
-          <br>
-          <%= langs.getName(language) %>: <%= country.translations[language] %>
-        <% } %>
-      </p>
-      <% */ %> -->
-
-      <!-- <% /* %>
-      <p class="card-text">
-        <a class="btn btn-primary" href="<%= 'https://www.google.com/maps/place/' + country.latlng[0] + ',' + country.latlng[1]%>" role="button">Google Map Location</a>
-      </p>
-      <% */ %> -->
 
     </small>
     <div style="text-align: center;">
@@ -211,3 +180,40 @@
   </div>
   <br>
 </div>
+
+
+<!-- <% /* %>
+<% if (country.demonym !== "") { %>
+  <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.demonyms %>">
+    <button type="button" class="btn btn-outline-success" disabled>
+      Demonym
+    </button>
+  </span>
+<% } %>
+<% */ %> -->
+
+<!-- <% /* %>
+<% if (country.gini !== "" && country.gini !== null ) { %>
+  <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.gini %>">
+    <button type="button" class="btn btn-outline-success" disabled>
+      Gini Coefficient
+    </button>
+  </span>
+<% } %>
+<% */ %> -->
+
+<!-- <% /* %>
+<p class="card-text">
+  The name of this country can be translated into the following languages:
+  <% for (const language in country.translations) { %>
+    <br>
+    <%= langs.getName(language) %>: <%= country.translations[language] %>
+  <% } %>
+</p>
+<% */ %> -->
+
+<!-- <% /* %>
+<p class="card-text">
+  <a class="btn btn-primary" href="<%= 'https://www.google.com/maps/place/' + country.latlng[0] + ',' + country.latlng[1]%>" role="button">Google Map Location</a>
+</p>
+<% */ %> -->
