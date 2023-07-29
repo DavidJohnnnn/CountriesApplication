@@ -115,25 +115,24 @@
             </button>
           </span>
         <% } %>
+        <% */ %> -->
 
         <br>
         <br>
-        <span class="d-inline-block" data-bs-toggle="tooltip" title="There are approximately <%= country.population %> people living there.">
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="There are approximately <%= (country.population).toLocaleString('en-US') %> people living there.">
           <button type="button" class="btn btn-outline-success" disabled>
             Population
           </button>
         </span>
 
-        <% console.log("Works here 3"); %>
-
-        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.area %> square kilometers">
+        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= (country.area).toLocaleString('en-US') %> square kilometers">
           <button type="button" class="btn btn-outline-success" disabled>
             Country Area
           </button>
         </span>
 
 
-        <% if (country.currencies !== "undefined" && country.currencies !== "") { %>
+        <% if (typeof country.currencies !== "undefined" && country.currencies !== "") { %>
           <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='This country uses the following currencies:
           <% Object.keys(country.currencies).forEach(key => { %>
               <br>- <%= country.currencies[key].name %> (<%= key %>, <%= country.currencies[key].symbol %>)
@@ -146,7 +145,6 @@
       </p>
 
       <% console.log("Works here 4"); %>
-      <% */ %> -->
 
       <% if (typeof country.borders !== "undefined" && country.borders !== "") { %>
         <p class="card-text">
