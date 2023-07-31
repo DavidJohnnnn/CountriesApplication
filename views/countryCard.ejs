@@ -90,9 +90,10 @@
 
       <% console.log("Works here 2"); %>
 
+      <% */ %> -->
 
       <p class="card-text">
-        <% if (country.capital !== 'undefined' && country.capital[0] !== "") { %>
+        <% if (typeof country.capital !== 'undefined' && country.capital[0] !== "") { %>
           <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.capital[0] %>">
             <button type="button" class="btn btn-outline-success" disabled>
               Capital
@@ -100,7 +101,7 @@
           </span>
         <% } %>
 
-        <% if (country.region !== "undefined" && country.region !== "") { %>
+        <% if (typeof country.region !== "undefined" && country.region !== "") { %>
           <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.region %>">
             <button type="button" class="btn btn-outline-success" disabled>
               Region
@@ -108,14 +109,13 @@
           </span>
         <% } %>
 
-        <% if (country.subregion !== "undefined" && country.subregion !== "") { %>
+        <% if (typeof country.subregion !== "undefined" && country.subregion !== "") { %>
           <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.subregion %>">
             <button type="button" class="btn btn-outline-success" disabled>
               Subregion
             </button>
           </span>
         <% } %>
-        <% */ %> -->
 
         <br>
         <br>
