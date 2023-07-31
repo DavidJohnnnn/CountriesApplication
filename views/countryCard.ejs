@@ -48,22 +48,25 @@
         <br>
 
       </p>
+
+      <% */ %> -->
+
       <p class="card-text">
-        <% console.log(country.tld) -%>
-        <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='
-          <% for (k = 0; k < Object.keys(country.tld).length; k++) { %>
-            <% if (k === Object.keys(country.tld).length - 1) { %>
-              <%= country.tld[k] %>
-            <% } else { %>
-              <%= country.tld[k] %>,
-            <% } %>
-          <% } %>'>
-          <button type="button" class="btn btn-outline-success" disabled>
-            Top Level Domain(s)
-          </button>
-        </span>
+        <% if (typeof(country.tld) !== 'undefined') { %>
+          <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='
+            <% for (k = 0; k < Object.keys(country.tld).length; k++) { %>
+              <% if (k === Object.keys(country.tld).length - 1) { %>
+                <%= country.tld[k] %>
+              <% } else { %>
+                <%= country.tld[k] %>,
+              <% } %>
+            <% } %>'>
+            <button type="button" class="btn btn-outline-success" disabled>
+              Top Level Domain(s)
+            </button>
+          </span>
 
-
+        <% } %>
 
         <% if (Object.keys(country.idd).length > 0 && typeof(country.idd.suffixes) === 'undefined') { %>
         <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='<%= country.idd.root %> <br />'>
@@ -73,12 +76,12 @@
         </span>
         <% } %>
 
-        <% else if (Object.keys(country.idd).length > 0 && typeof(country.idd.suffixes) !== 'undefined') { %>
+        <% if (Object.keys(country.idd).length > 0 && typeof(country.idd.suffixes) !== 'undefined') { %>
         <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-html="true" title='
           <% for (l = 0; l < Object.keys(country.idd.suffixes).length; l++) { %>
             <%= country.idd.root + country.idd.suffixes[l] %>
             <% if (l < Object.keys(country.idd.suffixes).length - 1) { %>
-              <br />
+              ,
             <% } %>
           <% } %>'>
           <button type="button" class="btn btn-outline-success" disabled>
@@ -86,11 +89,8 @@
           </button>
         </span>
         <% } %>
+
       </p>
-
-      <% console.log("Works here 2"); %>
-
-      <% */ %> -->
 
       <p class="card-text">
         <% if (typeof country.capital !== 'undefined' && country.capital[0] !== "") { %>
@@ -144,7 +144,6 @@
         <% } %>
       </p>
 
-      <% console.log("Works here 4"); %>
 
       <% if (typeof country.borders !== "undefined" && country.borders !== "") { %>
         <p class="card-text">
