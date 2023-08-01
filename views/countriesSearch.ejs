@@ -10,9 +10,17 @@
       <%- include('countryCard', {country: countriesData[0]}); -%>
     <% } else { %>
       <% for (i = 0; i < Object.keys(countriesData).length; i++){ %>
-        <% console.log("Works here 2"); %>
+        <% if (i % 3 == 0) { %>
+          <% console.log("works here", i % 3, i, (i - 2) % 3); %>
+          <div class="row"> <!-- for three column row -->
+        <% } %>
 
         <%- include('countryCard', {country: countriesData[i]}); -%>
+
+        <% if ((i - 2) % 3 == 0) { %>
+          <% console.log("works here", (i - 2) % 3); %>
+          </div>
+        <% } %>
       <% } %>
     <% } %>
   </div>

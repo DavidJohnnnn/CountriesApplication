@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card col">
   <br>
   <img class="card-img-top" src="<%= country.flags.png %>" alt="<%= country.flags.alt %>" aria-label="<%= country.flags.alt %>" title="<%= country.flags.alt %>">
 
@@ -19,7 +19,11 @@
   <div class="container-fluid plusBox cardThere">
     <i class="fas fa-plus-circle"></i>
   </div>
+
   <div class="container-fluid minusBox cardGone">
+    <div style="text-align: center;">
+      <i class="fas fa-minus-circle"></i>
+    </div>
     <small class="text-muted">
       <!-- <% /* %>      <% */ %> -->
 
@@ -31,8 +35,6 @@
             Two Letter Country Code
           </button>
         </span>
-
-        <% console.log("Works here"); %>
 
         <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.cca3 %>">
           <button type="button" class="btn btn-outline-success" disabled>
@@ -165,9 +167,6 @@
 
 
     </small>
-    <div style="text-align: center;">
-      <i class="fas fa-minus-circle"></i>
-    </div>
   </div>
   <br>
 </div>
