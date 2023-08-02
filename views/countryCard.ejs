@@ -27,11 +27,34 @@
     <small class="text-muted">
       <!-- <% /* %>      <% */ %> -->
 
+      <script>
+        async function copyContent() {
+          try {
+            await navigator.clipboard.writeText(copyText);
+            console.log('Content copied to clipboard');
+            /* Resolved - text copied to clipboard successfully */
+          } catch (err) {
+            console.error('Failed to copy: ', err);
+            /* Rejected - text failed to copy to the clipboard */
+          }
+        }
+
+        function test() {
+          console.log('Content test');
+        }
+      </script>
+
+      <%
+        function test() {
+          console.log('Content test');
+        }
+      %>
+
 
       <p class="card-text">
 
-        <span class="d-inline-block" data-bs-toggle="tooltip" title="<%= country.cca2 %>">
-          <button type="button" class="btn btn-outline-success" disabled>
+        <span class="d-inline-block 2code" data-bs-toggle="tooltip" title="<%= country.cca2 %>">
+          <button type="button" class="btn btn-outline-success" disabled onclick="<% test() %>">
             Two Letter Country Code
           </button>
         </span>
